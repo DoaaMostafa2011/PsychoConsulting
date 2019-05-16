@@ -4,6 +4,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+
     <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>

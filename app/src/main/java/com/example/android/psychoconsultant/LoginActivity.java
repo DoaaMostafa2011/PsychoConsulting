@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -23,11 +25,16 @@ public class LoginActivity extends AppCompatActivity {
     @InjectView(R.id.btn_login) Button _loginButton;
     @InjectView(R.id.link_signup) TextView _signupLink;
 
+    private FirebaseAuth auth;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+
+        //Get Firebase auth instance
+        auth = FirebaseAuth.getInstance();
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -67,7 +74,9 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+        // Implement your own authentication logic here.
+        //authenticate user
+        auth.signInWithEmailAndPassword(email, password);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {

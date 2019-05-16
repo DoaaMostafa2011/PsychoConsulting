@@ -1,6 +1,7 @@
 package com.example.android.psychoconsultant;
 
 import android.app.ProgressDialog;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -23,13 +29,16 @@ public class SignUpActivity extends AppCompatActivity {
     @InjectView(R.id.btn_signup) Button _signupButton;
     @InjectView(R.id.link_login) TextView _loginLink;
 
-
+    private FirebaseAuth auth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.inject(this);
+
+        //Get Firebase auth instance
+        auth = FirebaseAuth.getInstance();
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +76,9 @@ public class SignUpActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
+        // Implement your own signup logic here.
+        //create user
+        auth.createUserWithEmailAndPassword(email, password);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
