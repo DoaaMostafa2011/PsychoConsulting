@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "263811902428",
+    "firebase_url": "https://psychoconsultant-caa9e.firebaseio.com",
+    "project_id": "psychoconsultant-caa9e",
+    "storage_bucket": "psychoconsultant-caa9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263811902428:android:3a01c8352c1332c7",
+        "android_client_info": {
+          "package_name": "com.example.android.psychoconsultant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263811902428-71sthl4imcchsrmuuc10qo4l0g9a2h0q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.psychoconsultant",
+            "certificate_hash": "0993fb0170314873e0489498f7088458117c1b48"
+          }
+        },
+        {
+          "client_id": "263811902428-tjtb7eobf14nnbcn8b492jqfcbfrtipo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPjq3TEIm2yjsDryYcdFGQmCOIM6_BgOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263811902428-tjtb7eobf14nnbcn8b492jqfcbfrtipo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
