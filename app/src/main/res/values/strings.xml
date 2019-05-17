@@ -5,4 +5,6 @@
     <string name="title_activity_consultant">ConsultantActivity</string>
     <string name="sign_out">Sign Out</string>
     <string name="send_button_label">Send</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

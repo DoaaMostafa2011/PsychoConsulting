@@ -26,7 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.InjectView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ConsultantActivity extends AppCompatActivity {
 
@@ -36,11 +37,11 @@ public class ConsultantActivity extends AppCompatActivity {
     private MessageAdapter mMessageAdapter;
 
     // Initialize references to views
-    @InjectView(R.id.messageListView) ListView mMessageListView;
-    @InjectView(R.id.progressBar) ProgressBar mProgressBar;
-    @InjectView(R.id.photoPickerButton) ImageButton mPhotoPickerButton;
-    @InjectView(R.id.messageEditText) EditText mMessageEditText;
-    @InjectView(R.id.sendButton) Button mSendButton;
+    @BindView(R.id.messageListView) ListView mMessageListView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.photoPickerButton) ImageButton mPhotoPickerButton;
+    @BindView(R.id.messageEditText) EditText mMessageEditText;
+    @BindView(R.id.sendButton) Button mSendButton;
 
     private String mUsername;
 
@@ -55,6 +56,7 @@ public class ConsultantActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultant);
+        ButterKnife.bind(this);
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 
@@ -132,7 +134,7 @@ public class ConsultantActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_signout, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
