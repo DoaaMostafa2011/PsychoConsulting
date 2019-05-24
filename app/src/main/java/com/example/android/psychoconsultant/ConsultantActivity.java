@@ -1,6 +1,7 @@
 package com.example.android.psychoconsultant;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class ConsultantActivity extends AppCompatActivity {
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
 
     public static final int RC_SIGN_IN = 1;
+    private static final int RC_PHOTO_PICKER = 2;
 
     private MessageAdapter mMessageAdapter;
 
@@ -52,11 +54,12 @@ public class ConsultantActivity extends AppCompatActivity {
     @BindView(R.id.messageEditText) EditText mMessageEditText;
     @BindView(R.id.sendButton) Button mSendButton;
 
-    private String mUsername;
+    public static String mUsername;
 
     // Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference reference1, reference2;;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -74,6 +77,9 @@ public class ConsultantActivity extends AppCompatActivity {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages");
+
+        //reference1 = new mFirebaseDatabase("https://psychoconsultant-caa9e.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
+        //reference2 = new mFirebaseDatabase("https://psychoconsultant-caa9e.firebaseio.com/messages/" + UserDetails.chatWith + "_" + UserDetails.username);
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         // Initialize message ListView and its adapter
@@ -89,6 +95,10 @@ public class ConsultantActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: Fire an intent to show an image picker
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
             }
         });
 
@@ -133,7 +143,6 @@ public class ConsultantActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Toast.makeText(ConsultantActivity.this, "You're now signed in. Welcome to Consulting Room.", Toast.LENGTH_SHORT).show();
                     onSignedInInitialize(user.getDisplayName());
                 } else {
                     // User is signed out
@@ -197,7 +206,9 @@ public class ConsultantActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.sign_out_menu:
-                AuthUI.getInstance().signOut(this);
+                //AuthUI.getInstance().signOut(this);  //if we use firebase UI
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

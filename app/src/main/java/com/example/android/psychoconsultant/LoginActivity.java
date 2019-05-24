@@ -2,6 +2,7 @@ package com.example.android.psychoconsultant;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
 
+    NetworkUtil netTask = new NetworkUtil();
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                netTask.execute();
                 login();
             }
         });
@@ -77,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
         // Implement your own authentication logic here.
         //authenticate user
         auth.signInWithEmailAndPassword(email, password);
+
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -140,5 +148,36 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+    public class NetworkUtil extends AsyncTask<Void, Void, Void> {
+
+        private ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(LoginActivity.this);
+            dialog.setMessage("Loading...");
+            dialog.setCancelable(false);
+            dialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            if (new CheckNetwork(LoginActivity.this).isNetworkAvailable()) {
+                // your get/post related code..like HttpPost = new HttpPost(url);
+            } else {
+                // No Internet
+                 //Toast.makeText(LoginActivity.this, "no internet!", Toast.LENGTH_SHORT).show();
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+        }
     }
 }

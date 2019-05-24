@@ -15,9 +15,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.android.psychoconsultant.ConsultantActivity.mUsername;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -31,6 +35,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
 
+    String name ;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +46,8 @@ public class SignUpActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        _signupButton.setOnClickListener(new View.OnClickListener() {
+
+                _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signup();
@@ -72,13 +79,20 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
+        name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
         // Implement your own signup logic here.
         //create user
         auth.createUserWithEmailAndPassword(email, password);
+        final FirebaseUser user = auth.getCurrentUser();
+
+        UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .build();
+        user.updateProfile(profile);
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -96,6 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        mUsername = name ;
         finish();
     }
 

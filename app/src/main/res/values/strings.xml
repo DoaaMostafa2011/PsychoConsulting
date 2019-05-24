@@ -7,4 +7,5 @@
     <string name="send_button_label">Send</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="no_users_found">No Users found!</string>
 </resources>
