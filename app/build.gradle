@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword '0111150179'
+            storeFile file('J:/nanodegree android/PsychoConsultantSigningKey.jks')
+            storePassword '000000'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.android.psychoconsultant"
@@ -14,6 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -38,7 +47,6 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     annotationProcessor 'com.jakewharton:butterknife:9.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
-
     // Displaying images
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     //firebase
