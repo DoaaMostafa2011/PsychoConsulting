@@ -15,6 +15,7 @@
         <ImageView android:src="@drawable/logo2"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
+            android:contentDescription="@string/this_is_app_logo"
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal" />
 

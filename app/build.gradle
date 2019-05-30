@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'key0'
             keyPassword '0111150179'
-            storeFile file('J:/nanodegree android/PsychoConsultantSigningKey.jks')
+            storeFile file('$rootDir/PsychoConsultantSigningKey.jks')
             storePassword '000000'
         }
     }

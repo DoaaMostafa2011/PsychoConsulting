@@ -18,10 +18,9 @@
         android:layout_centerHorizontal="true"
         android:layout_alignStart="@id/appwidget_image"
         android:layout_margin="8dp"
-        android:background="#09C"
         android:contentDescription="@string/appwidget_text"
         android:text="@string/appwidget_text"
         android:textColor="#ffffff"
-        android:textSize="24sp"
+        android:textSize="12dp"
         android:textStyle="bold|italic" />
 </RelativeLayout>
