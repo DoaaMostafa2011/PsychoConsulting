@@ -5,10 +5,9 @@ android {
         config {
             keyAlias 'key0'
             keyPassword '123456'
-            storeFile file("$rootDir/PsychoConsultantSigningKey.jks")
-            storePassword  '123456'
+            storeFile file("$rootDir/keyStore.jks")
+            storePassword '123456'
         }
-
     }
     compileSdkVersion 28
     defaultConfig {
