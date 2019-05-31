@@ -4,10 +4,11 @@ android {
     signingConfigs {
         config {
             keyAlias 'key0'
-            keyPassword '0111150179'
-            storeFile file('$rootDir/PsychoConsultantSigningKey.jks')
-            storePassword '000000'
+            keyPassword '123456'
+            storeFile file("$rootDir/PsychoConsultantSigningKey.jks")
+            storePassword  '123456'
         }
+
     }
     compileSdkVersion 28
     defaultConfig {
